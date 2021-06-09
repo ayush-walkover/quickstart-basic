@@ -5,6 +5,7 @@ sudo chmod -R 0777 /var/www/html/bootstrap/cache
 #
 # cp .env.example .env
 # Run composer
+cd /var/www/html
 sudo composer install
 sudo php artisan config:clear
 sudo php artisan cache:clear
