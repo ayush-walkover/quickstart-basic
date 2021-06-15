@@ -1,16 +1,20 @@
 #!/bin/bash
-# Set permissions to storage and bootstrap cache
-sudo chmod -R 0777 /var/www/html/storage
-sudo chmod -R 0777 /var/www/html/bootstrap/cache
-#
-# cp .env.example .env
-# Run composer
+################################################################
+# After Install Bash script to configure Segmento Dev Server
+################################################################
+
+
+echo "::::::::::::::::::::::::::Setting Permissions:::::::::::::::::::::::::"
+sudo chown -R $USER:$USER /var/www/html
+sudo chmod -R 755 /var/www/html
 cd /var/www/html
-sudo composer install
-sudo php artisan config:clear
-sudo php artisan cache:clear
-sudo php artisan migrate
-sudo php artisan db:seed
-#
-# Run artisan commands
-#php artisan key:generate
+php composer.phar install
+chmod 755 storage
+php artisan config:clear
+php artisan config:cache
+
+echo"::::::::::::::::::::::::::Database Setup::::::::::::::::::::::::::::::"
+php artisan migrate
+php artisan db:seed
+
+echo "::::::::::::::::::::::::::Server Applications::::::::::::::::::::::::::"
